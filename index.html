@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>E-commerce Consultant Portfolio</title>
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <style>
+    :root {
+      --magnetic-button-x: 0;
+      --magnetic-button-y: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FBFBF8; /* A very soft beige */
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+    }
+    .gold-gradient-text {
+      background: -webkit-linear-gradient(45deg, #d4af37, #c19a27);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .scrolling-text-container {
+      animation: scroll-left 20s linear infinite;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .header-scrolled {
+      background-color: rgba(251, 251, 248, 0.8);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    }
+
+    /* --- NEW ANIMATIONS & EFFECTS --- */
+
+    /* Header Title Animation */
+    .animated-title span {
+      display: inline-block;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Hero Ken Burns Effect */
+    .hero-bg-image {
+      animation: kenburns 20s ease-out infinite;
+    }
+    @keyframes kenburns {
+      0% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Scroll-triggered Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* 3D Card Hover Effect */
+    .card-3d-container {
+      perspective: 1000px;
+    }
+    .card-3d {
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .card-3d-container:hover .card-3d {
+      transform: rotateY(-5deg) rotateX(10deg) scale(1.02);
+    }
+
+    /* Contact Modal Styles */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      animation: fadeIn 0.3s ease-out;
+    }
+    .modal-content {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+      animation: slideInUp 0.4s ease-out;
+    }
+    @keyframes slideInUp {
+      from { transform: translate(-50%, -40%); opacity: 0; }
+      to { transform: translate(-50%, -50%); opacity: 1; }
+    }
+
+
+    /* Chatbot Styles */
+    .chat-bubble-user {
+      background-color: #111827; /* Dark charcoal */
+      color: #FBFBF8;
+    }
+    .chat-bubble-bot {
+      background-color: #F3F4F6; /* Cool gray */
+      color: #1F2937;
+    }
+    .chat-window {
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    .chat-window.hidden {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      pointer-events: none;
+    }
+    .dot-flashing {
+      position: relative;
+      width: 6px;
+      height: 6px;
+      border-radius: 5px;
+      background-color: #988050;
+      color: #988050;
+      animation: dotFlashing 1s infinite linear alternate;
+      animation-delay: .5s;
+    }
+    .dot-flashing::before, .dot-flashing::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 0;
+    }
+    .dot-flashing::before {
+      left: -10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 5px;
+      background-color: #988050;
+      color: #988050;
+      animation: dotFlashing 1s infinite alternate;
+      animation-delay: 0s;
+    }
+    .dot-flashing::after {
+      left: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 5px;
+      background-color: #988050;
+      color: #988050;
+      animation: dotFlashing 1s infinite alternate;
+      animation-delay: 1s;
+    }
+    @keyframes dotFlashing {
+      0% {
+        background-color: #988050;
+      }
+      50%, 100% {
+        background-color: #d4af37;
+      }
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "rxjs": "https://esm.sh/rxjs@^7.8.2?conditions=es2015",
+    "rxjs/operators": "https://esm.sh/rxjs@^7.8.2/operators?conditions=es2015",
+    "rxjs/ajax": "https://esm.sh/rxjs@^7.8.2/ajax?conditions=es2015",
+    "rxjs/webSocket": "https://esm.sh/rxjs@^7.8.2/webSocket?conditions=es2015",
+    "rxjs/testing": "https://esm.sh/rxjs@^7.8.2/testing?conditions=es2015",
+    "rxjs/fetch": "https://esm.sh/rxjs@^7.8.2/fetch?conditions=es2015",
+    "@angular/compiler": "https://next.esm.sh/@angular/compiler@^21.0.5?external=rxjs",
+    "@angular/platform-browser": "https://next.esm.sh/@angular/platform-browser@^21.0.5?external=rxjs",
+    "@angular/core": "https://next.esm.sh/@angular/core@^21.0.5?external=rxjs",
+    "@angular/forms": "https://next.esm.sh/@angular/forms@^21.0.5?external=rxjs",
+    "@google/genai": "https://esm.sh/@google/genai"
+  }
+}
+</script>
+</head>
+<body class="antialiased text-gray-800">
+  <app-root></app-root>
+</body>
+</html>

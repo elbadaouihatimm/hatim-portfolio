@@ -1,0 +1,514 @@
+
+@if (currentView() === 'portfolio') {
+<main class="bg-stone-50">
+  <!-- HEADER -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" [class.header-scrolled]="scrolled()">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <div class="flex-shrink-0">
+          <a (click)="scrollTo('hero')" class="text-2xl font-bold tracking-tight text-gray-900 font-serif cursor-pointer animated-title">
+            @for(char of headerTitle; track $index; let i = $index) {
+              <span [style.animation-delay]="i * 0.05 + 's'">{{ char === ' ' ? '&nbsp;' : char }}</span>
+            }
+          </a>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a (click)="scrollTo('about')" class="text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">About</a>
+          <a (click)="scrollTo('services')" class="text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">Services</a>
+          <a (click)="scrollTo('work')" class="text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">Work</a>
+          <a (click)="openContactModal('General Inquiry')" class="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-md hover:bg-gray-800 transition-colors cursor-pointer">Work With Me</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <img src="https://picsum.photos/seed/ecom-hero/1920/1080" alt="Modern e-commerce dashboard" class="absolute inset-0 w-full h-full object-cover z-0 hero-bg-image">
+    <div class="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight reveal" #animatable>
+        Designing & Scaling High-Performance Shopify Brands
+      </h1>
+      <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-200 reveal" #animatable [style.transition-delay]="'100ms'">
+        I help brands build, automate, and scale profitable e-commerce systems using Shopify, data, and smart automation.
+      </p>
+      <div class="mt-10 flex justify-center items-center gap-4 reveal" #animatable [style.transition-delay]="'200ms'">
+        <a (click)="openContactModal('Strategy Call Request')" class="px-8 py-3 font-semibold text-gray-900 bg-white rounded-md hover:bg-stone-200 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+          Work With Me
+        </a>
+        <a (click)="scrollTo('services')" class="px-8 py-3 font-semibold text-white bg-transparent border-2 border-white/50 rounded-md hover:bg-white/10 hover:border-white transition-all duration-300 transform hover:scale-105 cursor-pointer">
+          Explore Services
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLLING ANNOUNCEMENT BAR -->
+  <div class="bg-gray-900 text-white py-4 overflow-hidden">
+    <div class="scrolling-text-container whitespace-nowrap">
+        <span class="mx-8 text-sm font-semibold tracking-wider">SHOPIFY PLUS PARTNER</span>
+        <span class="mx-8 text-sm font-semibold tracking-wider gold-gradient-text">KLAVIYO MASTER</span>
+        <span class="mx-8 text-sm font-semibold tracking-wider">CONVERSION RATE OPTIMIZATION</span>
+        <span class="mx-8 text-sm font-semibold tracking-wider">E-COMMERCE AUTOMATION</span>
+        <span class="mx-8 text-sm font-semibold tracking-wider">SHOPIFY PLUS PARTNER</span>
+        <span class="mx-8 text-sm font-semibold tracking-wider gold-gradient-text">KLAVIYO MASTER</span>
+        <span class="mx-8 text-sm font-semibold tracking-wider">CONVERSION RATE OPTIMIZATION</span>
+        <span class="mx-8 text-sm font-semibold tracking-wider">E-COMMERCE AUTOMATION</span>
+    </div>
+  </div>
+
+  <!-- TECH STACK SECTION -->
+  <section id="tech-stack" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 #animatable class="reveal text-sm font-semibold tracking-widest uppercase text-gray-500">My Technology Stack</h2>
+        <div #animatable class="reveal mt-8 flow-root" [style.transition-delay]="'100ms'">
+          <div class="max-w-4xl mx-auto grid grid-cols-3 md:grid-cols-6 gap-y-8 gap-x-4 items-center">
+            @for(tech of techStack(); track tech.name) {
+              <div class="flex flex-col items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+                <div class="h-10 text-gray-500" [innerHTML]="tech.icon"></div>
+                <p class="mt-2 text-xs font-semibold text-gray-600">{{tech.name}}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ME SECTION -->
+  <section id="about" class="py-24 bg-stone-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div #animatable class="reveal">
+          <img class="rounded-lg shadow-xl aspect-[4/5] object-cover" src="https://picsum.photos/seed/portrait/600/750" alt="Portrait of the consultant">
+        </div>
+        <div #animatable class="reveal space-y-6" [style.transition-delay]="'150ms'">
+          <span class="text-sm font-semibold tracking-widest uppercase text-amber-600">About Me</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Founder & E-commerce Architect</h2>
+          <p class="text-lg text-gray-600">
+            With over 5 years of dedicated experience and having built <span class="font-bold text-gray-800">more than 50 successful brands</span>, I partner with ambitious international clients to build more than just stores—we build scalable, automated, and profitable digital growth systems. My expertise lies at the intersection of strategy, execution, and automation, focusing on Shopify and Klaviyo to create seamless customer experiences that drive revenue.
+          </p>
+          <div #statsSection class="grid grid-cols-3 gap-4 text-center pt-4">
+              <div>
+                <p class="text-4xl font-bold text-gray-900 font-serif">{{ animatedStat1() }}</p>
+                <p class="mt-1 text-xs font-medium tracking-wider uppercase text-gray-500">{{ keyStats()[0].label }}</p>
+              </div>
+              <div>
+                <p class="text-4xl font-bold text-gray-900 font-serif">{{ animatedStat2() }}</p>
+                <p class="mt-1 text-xs font-medium tracking-wider uppercase text-gray-500">{{ keyStats()[1].label }}</p>
+              </div>
+              <div>
+                <p class="text-4xl font-bold text-gray-900 font-serif">{{ animatedStat3() }}</p>
+                <p class="mt-1 text-xs font-medium tracking-wider uppercase text-gray-500">{{ keyStats()[2].label }}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section id="services" class="py-24 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <span #animatable class="reveal text-sm font-semibold tracking-widest uppercase text-amber-600">Services</span>
+        <h2 #animatable class="reveal text-4xl md:text-5xl font-bold text-gray-900 mt-2" [style.transition-delay]="'100ms'">A Store of E-Commerce Solutions</h2>
+        <p #animatable class="reveal mt-4 max-w-2xl mx-auto text-lg text-gray-600" [style.transition-delay]="'200ms'">Select a service to learn more and inquire about how we can build your future, together.</p>
+      </div>
+      <div class="mt-20 space-y-24">
+        @for (service of services(); track service.title; let i = $index) {
+          <div #animatable class="reveal grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+            <div class="card-3d-container" [class.lg:order-2]="i % 2 !== 0">
+              <img [src]="service.image" alt="{{service.title}}" class="card-3d w-full h-full object-cover rounded-lg shadow-2xl">
+            </div>
+            <div [class.lg:order-1]="i % 2 !== 0">
+              <div class="text-amber-600 w-12 h-12" [innerHTML]="service.icon"></div>
+              <h3 class="text-3xl font-bold text-gray-900 mt-4">{{ service.title }}</h3>
+              <p class="mt-4 text-gray-600">{{ service.description }}</p>
+              <ul class="mt-6 space-y-3">
+                @for(feature of service.features; track feature) {
+                  <li class="flex items-center text-gray-700">
+                    <svg class="w-5 h-5 mr-3 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span>{{ feature }}</span>
+                  </li>
+                }
+              </ul>
+              <button (click)="openContactModal(service.title)" class="mt-8 px-8 py-3 font-semibold text-white bg-gray-900 rounded-md hover:bg-gray-800 transition-all duration-300 transform hover:scale-105">
+                {{ service.ctaText }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+  
+  <!-- WORK SECTION -->
+  <section id="work" class="py-24 bg-stone-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span #animatable class="reveal text-sm font-semibold tracking-widest uppercase text-amber-600">Featured Work</span>
+        <h2 #animatable class="reveal text-4xl md:text-5xl font-bold text-gray-900 mt-2" [style.transition-delay]="'100ms'">Transforming Brands, Driving Results</h2>
+      </div>
+      <div class="space-y-24">
+        @for (item of portfolioItems(); track item.title; let i = $index) {
+          <div #animatable class="reveal grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div [class.md:order-2]="i % 2 !== 0">
+              <img [src]="item.afterImg" alt="{{item.title}} after" class="w-full h-full object-cover rounded-lg shadow-xl">
+            </div>
+            <div [class.md:order-1]="i % 2 !== 0">
+              <h3 class="text-sm font-semibold tracking-widest uppercase text-amber-600">{{ item.category }}</h3>
+              <h2 class="text-3xl font-bold text-gray-900 mt-2">{{ item.title }}</h2>
+              <p class="mt-4 text-gray-600">{{ item.description }}</p>
+              <a (click)="openWorkModal(item)" class="inline-block mt-6 font-semibold text-gray-900 hover:text-amber-700 transition-colors cursor-pointer">
+                View Transformation &rarr;
+              </a>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS SECTION -->
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <span #animatable class="reveal text-sm font-semibold tracking-widest uppercase text-amber-600">Methodology</span>
+        <h2 #animatable class="reveal text-4xl md:text-5xl font-bold text-gray-900 mt-2" [style.transition-delay]="'100ms'">A Proven Path to Success</h2>
+        <p #animatable class="reveal mt-4 max-w-2xl mx-auto text-lg text-gray-600" [style.transition-delay]="'200ms'">My 4-step premium process ensures clarity, precision, and outstanding results at every stage.</p>
+      </div>
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          @for (step of processSteps(); track step.step; let i = $index) {
+          <div #animatable class="reveal relative bg-white p-8 rounded-lg border border-stone-200 overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300" [style.transition-delay]="i * 100 + 'ms'">
+            <span class="absolute -top-4 -left-2 text-8xl font-bold text-stone-100 select-none">{{ step.step }}</span>
+            <div class="relative">
+              <h3 class="mt-4 text-xl font-bold text-gray-900">{{ step.title }}</h3>
+              <p class="mt-2 text-gray-600">{{ step.description }}</p>
+            </div>
+          </div>
+          }
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section #testimonialsSection class="py-24 bg-stone-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+      <span #quoteMark class="absolute top-0 left-0 text-9xl text-stone-100/50 font-serif select-none -translate-x-1/2 -translate-y-1/2">&ldquo;</span>
+      <div #animatable class="reveal relative">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Trusted by Ambitious Brands</h2>
+        <div class="mt-12">
+            <p class="text-2xl text-gray-700 font-serif italic">"{{ testimonials()[0].quote }}"</p>
+            <div class="mt-8">
+              <p class="font-bold text-gray-900">{{ testimonials()[0].author }}</p>
+              <p class="text-sm text-gray-500">{{ testimonials()[0].company }}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section id="contact-cta" class="bg-gray-900">
+     <div class="max-w-4xl mx-auto py-24 px-4 sm:px-6 lg:px-8 text-center">
+        <h2 #animatable class="reveal text-4xl md:text-5xl font-bold text-white">
+          Let’s build a scalable e-commerce system, <span class="gold-gradient-text">not just a store.</span>
+        </h2>
+        <p #animatable class="reveal mt-6 text-lg text-gray-300" [style.transition-delay]="'100ms'">
+          Ready to elevate your brand and unlock its full potential? Book a free strategy call to get started.
+        </p>
+        <div #animatable class="reveal mt-8" [style.transition-delay]="'200ms'">
+           <button (click)="openContactModal('Free Strategy Call')" class="px-10 py-4 font-semibold text-gray-900 bg-white rounded-md hover:bg-stone-200 transition-all duration-300 transform hover:scale-105">
+              Book a Free Strategy Call
+            </button>
+        </div>
+      </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="md:col-span-2">
+          <h3 class="text-2xl font-bold tracking-tight font-serif">HATIM .B Consultant</h3>
+          <p class="mt-2 text-gray-400 max-w-sm">Designing & scaling the next generation of high-performance Shopify brands.</p>
+          <div class="mt-6">
+            <h4 class="text-sm font-semibold tracking-wider uppercase text-gray-400">Stay Updated</h4>
+            @if(subscriptionStatus() === 'success') {
+               <div class="mt-2 text-green-400">Thank you for subscribing!</div>
+            } @else {
+              <form [formGroup]="subscriptionForm" (ngSubmit)="onSubscribe()" class="mt-2 flex items-center">
+                <input type="email" formControlName="email" placeholder="Enter your email" class="bg-gray-800 border-gray-700 rounded-l-md py-2 px-3 text-white focus:outline-none focus:ring-amber-500 focus:border-amber-500 flex-grow disabled:opacity-50">
+                <button type="submit" [disabled]="subscriptionStatus() === 'subscribing'" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-r-md transition-colors disabled:bg-amber-800 disabled:cursor-not-allowed">
+                  @if(subscriptionStatus() === 'subscribing') {
+                    <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                  } @else {
+                    <span>&rarr;</span>
+                  }
+                </button>
+              </form>
+              @if (subscriptionForm.get('email')?.invalid && subscriptionForm.get('email')?.touched) {
+                <p class="mt-1 text-red-400 text-sm">Please enter a valid email.</p>
+              }
+              @if(subscriptionStatus() === 'error') {
+                 <p class="mt-1 text-red-400 text-sm">Subscription failed. Please try again.</p>
+              }
+            }
+          </div>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold tracking-wider uppercase text-gray-400">Navigation</h3>
+          <ul class="mt-4 space-y-2">
+            <li><a (click)="scrollTo('about')" class="text-gray-300 hover:text-white transition-colors cursor-pointer">About</a></li>
+            <li><a (click)="scrollTo('services')" class="text-gray-300 hover:text-white transition-colors cursor-pointer">Services</a></li>
+            <li><a (click)="scrollTo('work')" class="text-gray-300 hover:text-white transition-colors cursor-pointer">Work</a></li>
+            <li><a (click)="openContactModal('General Inquiry')" class="text-gray-300 hover:text-white transition-colors cursor-pointer">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold tracking-wider uppercase text-gray-400">Connect</h3>
+          <ul class="mt-4 space-y-2">
+             <li><a href="#" target="_blank" class="text-gray-300 hover:text-white transition-colors">LinkedIn</a></li>
+             <li><a href="#" target="_blank" class="text-gray-300 hover:text-white transition-colors">Twitter</a></li>
+             <li><a href="https://wa.me/1234567890" target="_blank" class="text-gray-300 hover:text-white transition-colors">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 border-t border-gray-800 pt-8 text-sm text-center text-gray-500 flex justify-between items-center">
+        <p>&copy; {{ 2024 }} HATIM .B Consultant. All rights reserved.</p>
+        <a (click)="showAdminView()" class="cursor-pointer hover:text-gray-300 transition-colors">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CHATBOT -->
+  <div class="fixed bottom-6 left-6 z-50">
+    <div class="chat-window" [class.hidden]="!isChatOpen()">
+      <div class="w-80 h-[28rem] mb-2 bg-white rounded-lg shadow-xl border border-stone-200 flex flex-col">
+        <div class="p-4 border-b border-stone-200 bg-stone-50 rounded-t-lg flex justify-between items-center">
+          <div>
+            <h3 class="font-bold text-gray-900">AI Assistant</h3>
+            <p class="text-xs text-gray-500">Powered by Gemini</p>
+          </div>
+          <button (click)="toggleChat()" class="text-gray-400 hover:text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+        <div #chatMessagesContainer class="flex-1 p-4 overflow-y-auto space-y-4">
+          @for(message of chatMessages(); track $index) {
+            <div class="flex" [class.justify-end]="message.author === 'user'">
+              <div class="rounded-lg py-2 px-4 max-w-[85%]" [class.chat-bubble-user]="message.author === 'user'" [class.chat-bubble-bot]="message.author === 'bot'">
+                <p class="text-sm">{{ message.text }}</p>
+              </div>
+            </div>
+          }
+          @if (isBotTyping()) {
+            <div class="flex justify-start">
+              <div class="rounded-lg py-3 px-4 chat-bubble-bot">
+                  <div class="dot-flashing"></div>
+              </div>
+            </div>
+          }
+        </div>
+        <form [formGroup]="chatForm" (ngSubmit)="handleChatSubmit()" class="p-4 border-t border-stone-200">
+          <div class="relative">
+            <input formControlName="message" type="text" placeholder="Ask about services..." class="w-full bg-stone-100 border-stone-300 rounded-full py-2 pl-4 pr-12 text-sm focus:ring-amber-500 focus:border-amber-500">
+            <button type="submit" [disabled]="chatForm.invalid || isBotTyping()" class="absolute right-1 top-1/2 -translate-y-1/2 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white rounded-full p-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" /></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <button (click)="toggleChat()" class="bg-white rounded-full p-2 shadow-lg border border-stone-200 hover:scale-110 transition-transform">
+      <div #lottieRobotContainer class="w-16 h-16"></div>
+    </button>
+  </div>
+</main>
+
+<!-- CONTACT MODAL -->
+@if(isContactModalOpen()) {
+  <div class="modal-backdrop" (click)="closeContactModal()"></div>
+  <div class="modal-content w-full max-w-lg">
+    <div class="bg-gray-900 text-white rounded-lg shadow-2xl">
+       @if (formStatus() === 'success') {
+        <div class="px-6 py-12 text-center">
+          <h3 class="font-bold text-2xl text-white">Thank You!</h3>
+          <p class="mt-2 text-gray-300">Your message regarding "{{selectedService()}}" has been sent. I will be in touch shortly.</p>
+          <button (click)="closeContactModal()" class="mt-6 px-6 py-2 font-semibold text-gray-900 bg-white rounded-md hover:bg-stone-200 transition-colors">
+            Close
+          </button>
+        </div>
+      } @else {
+        <div class="p-8">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">Contact Me</h3>
+              <p class="text-sm text-gray-400 mt-1">Inquiry about: <span class="font-semibold text-amber-500">{{ selectedService() }}</span></p>
+            </div>
+            <button (click)="closeContactModal()" class="text-gray-400 hover:text-white transition-colors text-3xl font-light">&times;</button>
+          </div>
+           @if (formStatus() === 'error') {
+            <div class="mt-4 bg-red-900/50 border border-red-500 text-red-300 px-4 py-2 rounded-md text-center text-sm">
+              <p>Something went wrong. Please try again.</p>
+            </div>
+          }
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="mt-6 grid grid-cols-1 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-400">Name</label>
+              <input type="text" id="name" formControlName="name" class="mt-1 block w-full bg-gray-800 border-gray-700 rounded-md shadow-sm py-3 px-4 text-white focus:outline-none focus:ring-amber-500 focus:border-amber-500 disabled:opacity-50">
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-400">Email Address</label>
+              <input type="email" id="email" formControlName="email" class="mt-1 block w-full bg-gray-800 border-gray-700 rounded-md shadow-sm py-3 px-4 text-white focus:outline-none focus:ring-amber-500 focus:border-amber-500 disabled:opacity-50">
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-400">Message</label>
+              <textarea id="message" formControlName="message" rows="4" class="mt-1 block w-full bg-gray-800 border-gray-700 rounded-md shadow-sm py-3 px-4 text-white focus:outline-none focus:ring-amber-500 focus:border-amber-500 disabled:opacity-50"></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" [disabled]="formStatus() === 'submitting' || contactForm.invalid" class="w-full px-10 py-3 font-semibold text-gray-900 bg-white rounded-md hover:bg-stone-200 transition-colors inline-flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+                @if (formStatus() === 'submitting') {
+                  <svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                  <span>Sending...</span>
+                } @else {
+                  <span>Send Inquiry</span>
+                }
+              </button>
+            </div>
+          </form>
+        </div>
+      }
+    </div>
+  </div>
+}
+
+<!-- WORK MODAL -->
+@if(isWorkModalOpen() && selectedPortfolioItem()) {
+  @let item = selectedPortfolioItem()!;
+  <div class="modal-backdrop" (click)="closeWorkModal()"></div>
+  <div class="modal-content w-full max-w-4xl">
+    <div class="bg-white rounded-lg shadow-2xl overflow-hidden">
+      <div class="p-6 sm:p-8 border-b border-gray-200 flex justify-between items-start">
+        <div>
+          <h3 class="text-sm font-semibold tracking-widest uppercase text-amber-600">{{ item.category }}</h3>
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">{{ item.title }}</h2>
+        </div>
+        <button (click)="closeWorkModal()" class="text-gray-400 hover:text-gray-600 transition-colors text-3xl font-light">&times;</button>
+      </div>
+      <div class="p-6 sm:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div>
+            <h4 class="text-center font-semibold text-gray-500 mb-2">BEFORE</h4>
+            <img [src]="item.beforeImg" alt="Before - {{ item.title }}" class="w-full h-auto object-cover rounded-md shadow-md border border-gray-200">
+          </div>
+          <div>
+            <h4 class="text-center font-bold text-gray-800 mb-2">AFTER</h4>
+            <img [src]="item.afterImg" alt="After - {{ item.title }}" class="w-full h-auto object-cover rounded-md shadow-lg border-2 border-amber-500">
+          </div>
+        </div>
+        <div class="mt-6 sm:mt-8">
+          <p class="text-gray-600">{{ item.description }}</p>
+          <a [href]="item.url" target="_blank" class="inline-block mt-4 font-semibold text-amber-600 hover:text-amber-800 transition-colors">
+            Visit Live Site &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+
+} @else {
+  <!-- ADMIN PANEL VIEW -->
+  <div class="bg-gray-100 min-h-screen">
+    @if (!isAdminLoggedIn()) {
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+           <div class="text-center">
+            <h2 class="text-2xl font-bold tracking-tight text-gray-900 font-serif">Admin Login</h2>
+            <p class="text-sm text-gray-500">Credentials: admin / password123</p>
+           </div>
+          <form [formGroup]="adminLoginForm" (ngSubmit)="handleAdminLogin()" class="space-y-6">
+            <div>
+              <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+              <input id="username" type="text" formControlName="username" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+            </div>
+            <div>
+              <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+              <input id="password" type="password" formControlName="password" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+            </div>
+             @if (adminLoginError()) {
+              <p class="text-sm text-red-600">{{ adminLoginError() }}</p>
+             }
+            <div>
+              <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700">
+                Sign in
+              </button>
+            </div>
+             <div class="text-center">
+              <a (click)="showPortfolioView()" class="text-sm text-amber-600 hover:text-amber-800 cursor-pointer">← Back to Portfolio</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    } @else {
+      <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        <header class="pb-6 mb-6 border-b border-gray-200 flex justify-between items-center">
+          <h1 class="text-3xl font-bold text-gray-900 font-serif">Admin Dashboard</h1>
+          <div>
+             <a (click)="showPortfolioView()" class="text-sm text-amber-600 hover:text-amber-800 cursor-pointer mr-6">← Back to Portfolio</a>
+            <button (click)="logout()" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700">Logout</button>
+          </div>
+        </header>
+
+        <section>
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Meeting Requests & Inquiries ({{ meetingRequests().length }})</h2>
+          <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            @if (meetingRequests().length === 0) {
+              <p class="text-center text-gray-500 py-12">No requests yet.</p>
+            } @else {
+              <ul class="divide-y divide-gray-200">
+                @for (request of meetingRequests(); track $index) {
+                  <li class="p-4">
+                     <div class="flex items-start justify-between">
+                       <div class="flex-1 min-w-0">
+                          <p class="text-sm font-medium text-gray-900 truncate">{{ request.name }} - <span class="font-normal text-gray-600">{{ request.email }}</span></p>
+                          <p class="mt-1 text-xs font-semibold text-amber-700 bg-amber-100 inline-block px-2 py-0.5 rounded-full">{{ request.service }}</p>
+                          <p class="mt-2 text-sm text-gray-500">{{ request.message }}</p>
+                       </div>
+                       <div class="text-sm text-gray-500 text-right ml-4 flex-shrink-0">
+                        {{ request.date.toLocaleDateString() }}
+                       </div>
+                    </div>
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+        </section>
+
+        <section class="mt-12">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Newsletter Subscribers ({{ subscribers().length }})</h2>
+           <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            @if (subscribers().length === 0) {
+              <p class="text-center text-gray-500 py-12">No subscribers yet.</p>
+            } @else {
+              <ul class="divide-y divide-gray-200">
+                @for (sub of subscribers(); track $index) {
+                  <li class="p-4 flex justify-between items-center">
+                    <p class="text-sm font-medium text-gray-900">{{ sub.email }}</p>
+                    <p class="text-sm text-gray-500">{{ sub.date.toLocaleDateString() }}</p>
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+        </section>
+      </div>
+    }
+  </div>
+}
